@@ -1,0 +1,12 @@
+{
+  "name": "zp_file_server",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node ./app.js"
+  },
+  "dependencies": {
+    "formidable": "^1.2.6",
+    "request": "^2.88.2",
+    "zip-local": "^0.3.4"
+  }
+}

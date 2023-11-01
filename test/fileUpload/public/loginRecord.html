@@ -1,0 +1,83 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
+    <title>zp文件服务器</title>
+    <script src="/public/js/jq.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+        }
+        .sticky {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+        }
+        table{
+        }
+        table tbody tr{
+        }
+        table th, table td{
+            min-width: 180px;
+            max-width: 300px;
+            text-align: center;
+            border: 1px solid #03a9f4;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>User</th>
+                <th>Password</th>
+                <th>Time</th>
+                <th>IP</th>
+                <th>Result</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+        window.onload = function(){
+
+            let tbody = document.getElementById('tbody')
+            $.ajax({
+                url: '/login_record',
+                type: 'get',
+                success(d) {
+                    console.log("d: ", d);
+                    d.reverse()
+                    var str = ''
+                    d.forEach(function (item) {
+                        str += `<tr class="${item.Result === '验证失败' ? 'red' : 'blue'}">
+                                <td>${item.User}</td>
+                                <td>${item.Password ? item.Password : ''}</td>
+                                <td>${item.Time}</td>
+                                <td>${item.IP}</td>
+                                <td>${item.Result}</td>
+                            </tr>`
+                    })
+                    tbody.innerHTML = str
+                }
+            })
+        }
+    </script>
+
+</body>
+
+</html>
